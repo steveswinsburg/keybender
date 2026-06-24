@@ -123,7 +123,8 @@ enum TranslationMode: String, CaseIterable, Equatable {
     ]
 
     // Approximate English->Greek substitution using common transliteration/visual matches.
-    // Some letters intentionally share a mapping because Greek has fewer base letters (e.g. C/K).
+    // Shared mappings are intentional because Greek has fewer base letters (e.g. C/K -> Κ).
+    // A few entries are visual substitutions for variety rather than strict transliteration (e.g. V -> Ω).
     private static let greekTable: [Character: String] = [
         "A": "Α", "B": "Β", "C": "Κ", "D": "Δ", "E": "Ε", "F": "Φ", "G": "Γ",
         "H": "Η", "I": "Ι", "J": "Ξ", "K": "Κ", "L": "Λ", "M": "Μ", "N": "Ν",
