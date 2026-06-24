@@ -56,6 +56,11 @@ curl -fsSL https://raw.githubusercontent.com/steveswinsburg/keybender/main/insta
 ```
 
 `/usr/local/bin` may require elevated privileges.
+Example:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/steveswinsburg/keybender/main/install.sh | sudo INSTALL_DIR=/usr/local/bin bash
+```
 
 ## Run It
 
