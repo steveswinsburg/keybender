@@ -36,7 +36,7 @@ Download and install the latest release binary:
 curl -fsSL https://raw.githubusercontent.com/steveswinsburg/keybender/main/install.sh | bash
 ```
 
-Warning: this executes remote code immediately. Use the safer flow below if you prefer to inspect first.
+warning: this executes remote code immediately. Use the safer flow below if you prefer to inspect first.
 
 Safer alternative (download, inspect, then run):
 
