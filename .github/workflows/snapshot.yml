@@ -45,8 +45,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           # List all snapshot releases sorted by creation date (newest first)
-          SNAPSHOTS=$(gh release list --limit 100 --json tagName,isPrerelease,createdAt \
-            --jq '[.[] | select(.tagName | startswith("snapshot-"))] | sort_by(.createdAt) | reverse | .[].tagName')
+          SNAPSHOTS=$(gh release list --limit 1000 --json tagName,isPrerelease,createdAt \
+            --jq '[.[] | select(.tagName | startswith("snapshot-")) | select(.isPrerelease == true)] | sort_by(.createdAt) | reverse | .[].tagName')
 
           COUNT=0
           while IFS= read -r TAG; do
