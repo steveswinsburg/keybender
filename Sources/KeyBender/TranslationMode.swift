@@ -144,7 +144,7 @@ enum TranslationMode: String, CaseIterable, Equatable {
         default: return nil
         }
 
-        let offset = (value - base + shift) % 26
+        let offset = ((value - base + shift) % 26 + 26) % 26
         return String(UnicodeScalar(base + offset)!)
     }
 
