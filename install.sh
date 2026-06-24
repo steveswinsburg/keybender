@@ -39,7 +39,12 @@ fi
 
 expected_checksum="$(awk '{print $1}' "$tmp_dir/KeyBender.zip.sha256")"
 actual_checksum="$(shasum -a 256 "$tmp_dir/KeyBender.zip" | awk '{print $1}')"
-if [[ -z "$expected_checksum" || -z "$actual_checksum" || "$expected_checksum" != "$actual_checksum" ]]; then
+if [[ -z "$expected_checksum" || -z "$actual_checksum" ]]; then
+  echo "Checksum verification failed: missing checksum value"
+  exit 1
+fi
+
+if [[ "$expected_checksum" != "$actual_checksum" ]]; then
   echo "Checksum verification failed. Expected: $expected_checksum, Got: $actual_checksum"
   exit 1
 fi
