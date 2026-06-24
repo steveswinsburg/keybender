@@ -28,6 +28,22 @@ Examples:
 - Swift 5.9+
 - Accessibility permission enabled for the app
 
+## Install (binary via curl)
+
+Download and install the latest release binary:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/steveswinsburg/keybender/main/install.sh | bash
+```
+
+This installs `KeyBender` to `~/.local/bin/KeyBender` by default.
+
+To install elsewhere:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/steveswinsburg/keybender/main/install.sh | INSTALL_DIR=/usr/local/bin bash
+```
+
 ## Run It
 
 ```bash
