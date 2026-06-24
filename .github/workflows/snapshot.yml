@@ -1,0 +1,58 @@
+name: Snapshot
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  snapshot:
+    name: Build and publish snapshot
+    runs-on: macos-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build release binary
+        run: swift build -c release
+
+      - name: Package binary
+        run: |
+          mkdir -p dist
+          cp .build/release/KeyBender dist/KeyBender
+          cd dist
+          zip KeyBender.zip KeyBender
+
+      - name: Create snapshot tag
+        id: tag
+        run: |
+          TAG="snapshot-$(date -u +'%Y%m%d%H%M%S')-${GITHUB_SHA::7}"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+
+      - name: Create snapshot release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ steps.tag.outputs.tag }}" \
+            dist/KeyBender.zip \
+            --title "Snapshot ${{ steps.tag.outputs.tag }}" \
+            --notes "Automated snapshot build from commit ${{ github.sha }}" \
+            --prerelease
+
+      - name: Clean up old snapshots (keep last 3)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # List all snapshot releases sorted by creation date (newest first)
+          SNAPSHOTS=$(gh release list --limit 100 --json tagName,isPrerelease,createdAt \
+            --jq '[.[] | select(.tagName | startswith("snapshot-"))] | sort_by(.createdAt) | reverse | .[].tagName')
+
+          COUNT=0
+          while IFS= read -r TAG; do
+            COUNT=$((COUNT + 1))
+            if [ "$COUNT" -gt 3 ]; then
+              echo "Deleting old snapshot: $TAG"
+              gh release delete "$TAG" --yes --cleanup-tag
+            fi
+          done <<< "$SNAPSHOTS"
