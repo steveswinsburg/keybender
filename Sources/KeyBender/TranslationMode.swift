@@ -122,12 +122,13 @@ enum TranslationMode: String, CaseIterable, Equatable {
         " ": "/"
     ]
 
+    // Approximate English->Greek substitution using common transliteration/visual matches.
     private static let greekTable: [Character: String] = [
-        "A": "Α", "B": "Β", "C": "Ϲ", "D": "Δ", "E": "Ε", "F": "Φ", "G": "Γ",
+        "A": "Α", "B": "Β", "C": "Κ", "D": "Δ", "E": "Ε", "F": "Φ", "G": "Γ",
         "H": "Η", "I": "Ι", "J": "Ξ", "K": "Κ", "L": "Λ", "M": "Μ", "N": "Ν",
         "O": "Ο", "P": "Π", "Q": "Θ", "R": "Ρ", "S": "Σ", "T": "Τ", "U": "Υ",
         "V": "Ω", "W": "Ψ", "X": "Χ", "Y": "Ϋ", "Z": "Ζ",
-        "a": "α", "b": "β", "c": "ϲ", "d": "δ", "e": "ε", "f": "φ", "g": "γ",
+        "a": "α", "b": "β", "c": "κ", "d": "δ", "e": "ε", "f": "φ", "g": "γ",
         "h": "η", "i": "ι", "j": "ξ", "k": "κ", "l": "λ", "m": "μ", "n": "ν",
         "o": "ο", "p": "π", "q": "θ", "r": "ρ", "s": "σ", "t": "τ", "u": "υ",
         "v": "ω", "w": "ψ", "x": "χ", "y": "ϋ", "z": "ζ"
