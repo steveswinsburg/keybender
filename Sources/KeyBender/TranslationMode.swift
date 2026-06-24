@@ -124,6 +124,7 @@ enum TranslationMode: String, CaseIterable, Equatable {
 
     // Approximate English->Greek substitution using common transliteration/visual matches.
     // Shared mappings are intentional because Greek has fewer base letters (e.g. C/K -> Κ).
+    // This mode is stylistic and one-way, so reversibility is not guaranteed.
     // A few entries are visual substitutions for variety rather than strict transliteration (e.g. V -> Ω).
     private static let greekTable: [Character: String] = [
         "A": "Α", "B": "Β", "C": "Κ", "D": "Δ", "E": "Ε", "F": "Φ", "G": "Γ",
@@ -137,6 +138,7 @@ enum TranslationMode: String, CaseIterable, Equatable {
     ]
 
     private static func shiftAlphabetic(_ char: Character, by shift: Int) -> String? {
+        let alphabetSize = 26
         guard let scalar = char.unicodeScalars.first, scalar.isASCII else { return nil }
         let value = Int(scalar.value)
         let base: Int
@@ -147,7 +149,7 @@ enum TranslationMode: String, CaseIterable, Equatable {
         default: return nil
         }
 
-        let offset = ((value - base + shift) % 26 + 26) % 26
+        let offset = ((value - base + shift) % alphabetSize + alphabetSize) % alphabetSize
         return String(UnicodeScalar(base + offset)!)
     }
 
