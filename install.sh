@@ -32,6 +32,7 @@ fi
 
 if ! curl -fsSL "$CHECKSUM_URL" -o "$tmp_dir/KeyBender.zip.sha256"; then
   echo "Failed to download checksum from $CHECKSUM_URL"
+  echo "Check your network connection and confirm the release checksum is published."
   exit 1
 fi
 
@@ -59,7 +60,7 @@ if [[ ! -w "$INSTALL_DIR" ]]; then
 fi
 
 if ! install -m 0755 "$tmp_dir/KeyBender" "$INSTALL_DIR/KeyBender"; then
-  echo "Failed to install KeyBender to $INSTALL_DIR (check permissions)"
+  echo "Failed to install KeyBender to $INSTALL_DIR"
   exit 1
 fi
 
