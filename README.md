@@ -13,6 +13,10 @@ Current modes:
 - Octal
 - Decimal
 - Morse
+- Caesar +3
+- ROT13
+- Atbash
+- Greek
 - Off
 
 Examples:
@@ -21,6 +25,10 @@ Examples:
 - `A` -> `01000001` in Binary mode
 - `A` -> `65` in Decimal mode
 - `A` -> `·− ` in Morse mode
+- `A` -> `D` in Caesar +3 mode
+- `A` -> `N` in ROT13 mode
+- `A` -> `Z` in Atbash mode
+- `A` -> `Α` in Greek mode
 
 ## Requirements
 
@@ -68,4 +76,8 @@ Keyboard shortcuts:
 - Command-Shift-3: Octal
 - Command-Shift-4: Decimal
 - Command-Shift-5: Morse
+- Command-Shift-6: Caesar +3
+- Command-Shift-7: ROT13
+- Command-Shift-8: Atbash
+- Command-Shift-9: Greek
 - Command-Shift-0: Off
