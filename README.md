@@ -36,6 +36,14 @@ Download and install the latest release binary:
 curl -fsSL https://raw.githubusercontent.com/steveswinsburg/keybender/main/install.sh | bash
 ```
 
+Safer alternative (download, inspect, then run):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/steveswinsburg/keybender/main/install.sh -o install.sh
+less install.sh
+bash install.sh
+```
+
 This installs `KeyBender` to `~/.local/bin/KeyBender` by default.
 
 To install elsewhere:

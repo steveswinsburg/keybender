@@ -25,6 +25,7 @@ trap 'rm -rf "$tmp_dir"' EXIT
 
 if ! curl -fsSL "$ASSET_URL" -o "$tmp_dir/KeyBender.zip"; then
   echo "Failed to download KeyBender from $ASSET_URL"
+  echo "Check your network connection and confirm a release binary is available."
   exit 1
 fi
 
