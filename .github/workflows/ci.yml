@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    name: Build and verify
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        run: swift build -c release
+
+      - name: Test
+        run: |
+          if swift package describe --type json | python3 -c "import sys,json; d=json.load(sys.stdin); exit(0 if any(t['type']=='test' for t in d.get('targets',[])) else 1)" 2>/dev/null; then
+            swift test
+          else
+            echo "No test targets found, skipping"
+          fi
