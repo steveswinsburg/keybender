@@ -53,6 +53,8 @@ To install elsewhere:
 curl -fsSL https://raw.githubusercontent.com/steveswinsburg/keybender/main/install.sh | INSTALL_DIR=/usr/local/bin bash
 ```
 
+`/usr/local/bin` may require elevated privileges.
+
 ## Run It
 
 ```bash

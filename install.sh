@@ -35,7 +35,9 @@ if ! curl -fsSL "$CHECKSUM_URL" -o "$tmp_dir/KeyBender.zip.sha256"; then
   exit 1
 fi
 
-if ! (cd "$tmp_dir" && shasum -a 256 -c KeyBender.zip.sha256); then
+expected_checksum="$(awk '{print $1}' "$tmp_dir/KeyBender.zip.sha256")"
+actual_checksum="$(shasum -a 256 "$tmp_dir/KeyBender.zip" | awk '{print $1}')"
+if [[ -z "$expected_checksum" || "$expected_checksum" != "$actual_checksum" ]]; then
   echo "Checksum verification failed for downloaded KeyBender.zip"
   exit 1
 fi
@@ -50,8 +52,14 @@ if [[ ! -f "$tmp_dir/KeyBender" ]]; then
   exit 1
 fi
 
+if [[ ! -w "$INSTALL_DIR" ]]; then
+  echo "Install directory is not writable: $INSTALL_DIR"
+  echo "Use a writable INSTALL_DIR or run with elevated privileges."
+  exit 1
+fi
+
 if ! install -m 0755 "$tmp_dir/KeyBender" "$INSTALL_DIR/KeyBender"; then
-  echo "Failed to install KeyBender to $INSTALL_DIR"
+  echo "Failed to install KeyBender to $INSTALL_DIR (check permissions)"
   exit 1
 fi
 
