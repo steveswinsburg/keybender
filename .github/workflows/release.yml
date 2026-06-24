@@ -34,6 +34,7 @@ jobs:
           cp .build/release/KeyBender dist/KeyBender
           cd dist
           zip KeyBender.zip KeyBender
+          shasum -a 256 KeyBender.zip > KeyBender.zip.sha256
 
       - name: Create release
         env:
@@ -41,5 +42,6 @@ jobs:
         run: |
           gh release create "v${{ inputs.version }}" \
             dist/KeyBender.zip \
+            dist/KeyBender.zip.sha256 \
             --title "KeyBender v${{ inputs.version }}" \
             --generate-notes

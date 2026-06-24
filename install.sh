@@ -4,6 +4,7 @@ set -euo pipefail
 
 REPO="steveswinsburg/keybender"
 ASSET_URL="https://github.com/${REPO}/releases/latest/download/KeyBender.zip"
+CHECKSUM_URL="https://github.com/${REPO}/releases/latest/download/KeyBender.zip.sha256"
 INSTALL_DIR="${INSTALL_DIR:-$HOME/.local/bin}"
 
 if [[ "$(uname -s)" != "Darwin" ]]; then
@@ -11,7 +12,7 @@ if [[ "$(uname -s)" != "Darwin" ]]; then
   exit 1
 fi
 
-for cmd in curl unzip install; do
+for cmd in curl unzip install shasum; do
   if ! command -v "$cmd" >/dev/null 2>&1; then
     echo "Missing required command: $cmd"
     exit 1
@@ -26,6 +27,16 @@ trap 'rm -rf "$tmp_dir"' EXIT
 if ! curl -fsSL "$ASSET_URL" -o "$tmp_dir/KeyBender.zip"; then
   echo "Failed to download KeyBender from $ASSET_URL"
   echo "Check your network connection and confirm a release binary is available."
+  exit 1
+fi
+
+if ! curl -fsSL "$CHECKSUM_URL" -o "$tmp_dir/KeyBender.zip.sha256"; then
+  echo "Failed to download checksum from $CHECKSUM_URL"
+  exit 1
+fi
+
+if ! (cd "$tmp_dir" && shasum -a 256 -c KeyBender.zip.sha256); then
+  echo "Checksum verification failed for downloaded KeyBender.zip"
   exit 1
 fi
 

@@ -45,6 +45,7 @@ bash install.sh
 ```
 
 This installs `KeyBender` to `~/.local/bin/KeyBender` by default.
+The installer verifies the downloaded zip using the release SHA-256 checksum.
 
 To install elsewhere:
 
