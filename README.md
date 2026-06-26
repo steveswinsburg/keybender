@@ -36,6 +36,40 @@ Examples:
 - Swift 5.9+
 - Accessibility permission enabled for the app
 
+## Install (binary via curl)
+
+Download and install the latest release binary:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/steveswinsburg/keybender/main/install.sh | bash
+```
+
+warning: this executes remote code immediately. Use the safer flow below if you prefer to inspect first.
+
+Safer alternative (download, inspect, then run):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/steveswinsburg/keybender/main/install.sh -o install.sh
+less install.sh
+bash install.sh
+```
+
+This installs `KeyBender` to `~/.local/bin/KeyBender` by default.
+The installer verifies the downloaded zip using the release SHA-256 checksum.
+
+To install elsewhere:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/steveswinsburg/keybender/main/install.sh | INSTALL_DIR=/usr/local/bin bash
+```
+
+`/usr/local/bin` may require elevated privileges.
+Example:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/steveswinsburg/keybender/main/install.sh | sudo INSTALL_DIR=/usr/local/bin bash
+```
+
 ## Run It
 
 ```bash
